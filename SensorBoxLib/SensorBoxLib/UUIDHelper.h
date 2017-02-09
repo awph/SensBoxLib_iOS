@@ -24,8 +24,10 @@
 @interface UUIDHelper : NSObject
 
 + (int) UUIDSAreEqual:(CFUUIDRef)u1 u2:(CFUUIDRef)u2;
++ (int) NSUUIDSAreEqual:(NSUUID *)u1 u2:(NSUUID *)u2;
 +(NSString*) CBUUIDToString:(CBUUID *) UUID;
 +(NSString*) UUIDToString:(CFUUIDRef)UUID;
++(NSString*) NSUUIDToString:(NSUUID *)UUID;
 +(int) compareCBUUID:(CBUUID *) UUID1 UUID2:(CBUUID *)UUID2;
 +(int) compareCBUUIDToInt:(CBUUID *)UUID1 UUID2:(UInt16)UUID;
 +(UInt16) CBUUIDToInt:(CBUUID *) UUID;

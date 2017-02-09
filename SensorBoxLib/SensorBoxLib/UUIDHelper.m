@@ -67,6 +67,18 @@
 }
 
 
+//! compares two NSUUID's
+/**
+ @param u1 NSUUID 1 to compare
+ @param u2 NSUUID 2 to compare
+ 
+ @returns 1 (equal) 0 (not equal)
+ */
++ (int) NSUUIDSAreEqual:(NSUUID *)u1 u2:(NSUUID *)u2 {
+    return [u1.UUIDString isEqualToString:u2.UUIDString] ? 1 : 0;
+}
+
+
 //! Converts CBUUID to a NSString
 /**
     CBUUIDToString converts the data of a CBUUID class to a character pointer for easy printout using printf()
@@ -95,6 +107,21 @@
     return [(NSString *)s autorelease];
     
 }
+
+
+//! Converts NSUUID to a NSString
+/**
+ *  NSUUIDToString converts the data of a NSUUID class to a character pointer for easy printout using printf()
+ *
+ *  @param UUID UUID to convert to string
+ *
+ *  @returns Pointer to a character buffer containing UUID in string representation
+ *
+ */
++(NSString*) NSUUIDToString:(NSUUID *)UUID {
+    return UUID.UUIDString;
+}
+
 
 //! compares two CBUUID's
 /**

@@ -377,9 +377,9 @@
  *  
  *  @returns UUID of peripheral
 */    
-- (CFUUIDRef) getUUID
+- (NSUUID *) getUUID
 {
-    return (CFUUIDRef)self.peripheral.UUID;
+    return self.peripheral.identifier;
 }
 
 //! Connects to the SensorBox

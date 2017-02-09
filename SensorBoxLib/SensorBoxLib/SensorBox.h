@@ -101,7 +101,7 @@
 - (id) initWithPeripheral:(CBPeripheral*)inPeripheral
            centralManager:(CBCentralManager*)inCM;
 
-- (CFUUIDRef) getUUID;
+- (NSUUID *) getUUID;
 - (void) connect;
 - (void) reportConnectStateChanged:(BOOL)connected;
 - (void) disconnect;

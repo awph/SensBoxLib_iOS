@@ -166,7 +166,7 @@ static SensorBoxManager *managerInstance = nil;
             SensorBox *sb = [copy objectAtIndex:i];
             if ( ! sb.isDiscovered )
             {
-                NSString* string = [UUIDHelper UUIDToString:[sb getUUID]];
+                NSString* string = [UUIDHelper NSUUIDToString:[sb getUUID]];
                 [DebugManager writeDebugLogWithLevel:DebugLevelInfo messsage:@"Device with UUID %@ is lost. Removing from list\r\n", string];
                 [self.sensorBoxes removeObject:sb];
             }
@@ -215,7 +215,7 @@ static SensorBoxManager *managerInstance = nil;
 */  
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI {
   
-    NSString* string = [UUIDHelper UUIDToString:peripheral.UUID];
+    NSString* string = [UUIDHelper NSUUIDToString:peripheral.identifier];
     [DebugManager writeDebugLogWithLevel:DebugLevelInfo messsage:@"found device with UUID %@\r\n", string];
     
     if(!self.sensorBoxes)
@@ -228,7 +228,7 @@ static SensorBoxManager *managerInstance = nil;
         for(int i=0; i<self.sensorBoxes.count; i++)
         {
             SensorBox *sb = [self.sensorBoxes objectAtIndex:i];
-            if ([UUIDHelper UUIDSAreEqual:[sb getUUID] u2:peripheral.UUID]) {
+            if ([UUIDHelper NSUUIDSAreEqual:[sb getUUID] u2:peripheral.identifier]) {
                 // This is a duplicate discover or we already discovered it earlier
                 sb.isDiscovered = TRUE;
                 if ([[self delegate] respondsToSelector:@selector(sensorBoxListUpdated:)])
@@ -260,13 +260,13 @@ static SensorBoxManager *managerInstance = nil;
     // Find SensorBox object for that peripheral
     if ( self.sensorBoxes ) 
     {
-        [DebugManager writeDebugLogWithLevel:DebugLevelInfo messsage:@"Connect Peripheral: %@\r\n", [UUIDHelper UUIDToString:peripheral.UUID]];
+        [DebugManager writeDebugLogWithLevel:DebugLevelInfo messsage:@"Connect Peripheral: %@\r\n", [UUIDHelper NSUUIDToString:peripheral.identifier]];
         
         for(int i=0; i<self.sensorBoxes.count; i++)
         {
             SensorBox *sb = [self.sensorBoxes objectAtIndex:i];
             
-            if ([UUIDHelper UUIDSAreEqual:[sb getUUID] u2:peripheral.UUID]) {
+            if ([UUIDHelper NSUUIDSAreEqual:[sb getUUID] u2:peripheral.identifier]) {
                 // Sensorbox found. Report the state change to the SensorBox object.
                 [sb reportConnectStateChanged:TRUE];
                 return;
@@ -295,12 +295,12 @@ static SensorBoxManager *managerInstance = nil;
     // Find SensorBox object for that peripheral
     if ( self.sensorBoxes )
     {
-        [DebugManager writeDebugLogWithLevel:DebugLevelInfo messsage:@"Disconnect Peripheral: %@\r\n", [UUIDHelper UUIDToString:peripheral.UUID]];
+        [DebugManager writeDebugLogWithLevel:DebugLevelInfo messsage:@"Disconnect Peripheral: %@\r\n", [UUIDHelper NSUUIDToString:peripheral.identifier]];
         
         for(int i=0; i<self.sensorBoxes.count; i++)
         {
             SensorBox *sb = [self.sensorBoxes objectAtIndex:i];
-            if ([UUIDHelper UUIDSAreEqual:[sb getUUID] u2:peripheral.UUID]) {
+            if ([UUIDHelper NSUUIDSAreEqual:[sb getUUID] u2:peripheral.identifier]) {
                 // Report connection state to SensorBox object
                 [sb reportConnectStateChanged:FALSE];
                 return;
